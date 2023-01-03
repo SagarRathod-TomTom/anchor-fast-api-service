@@ -12,11 +12,11 @@ async def root():
 
 
 @app.post("/api/anchors/key")
-async def save_anchor(anchorKey: Any):
+async def save_anchor(anchorKey: Any, location: Any):
     global index, anchor_store
     index = index + 1
     print(f'Saving anchor at index: {index} = {anchorKey}')
-    anchor_store[index] = anchorKey
+    anchor_store[index] = (anchorKey, location)
     return index
 
 
@@ -24,14 +24,14 @@ async def save_anchor(anchorKey: Any):
 async def get_anchor():
     global index, anchor_store
     print(f'Getting last anchor:{anchor_store[index]}')
-    return anchor_store[index]
+    return anchor_store[index][0]
 
 
 @app.get("/api/anchors/{anchor_number}")
 async def get_anchor_with_anchor_id(anchor_number: int):
     global anchor_store
     print(f'Getting anchor with id {anchor_number}:{anchor_store[anchor_number]}')
-    return anchor_store[anchor_number]
+    return anchor_store[anchor_number][0]
 
 
 @app.get("/api/allanchors")
