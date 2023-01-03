@@ -1,5 +1,6 @@
 from typing import Any
 from fastapi import FastAPI
+import json
 
 index = 0
 anchor_store = {}
@@ -8,7 +9,7 @@ app = FastAPI()
 
 @app.get("/")
 async def root():
-    return {"message": "Hello World"}
+    return {"message": "Anchor Backend Sharing Service"}
 
 
 @app.post("/api/anchors/key")
@@ -38,7 +39,7 @@ async def get_anchor_with_anchor_id(anchor_number: int):
 async def get_all_anchors():
     global anchor_store
     print('Anchor Store:', anchor_store)
-    return ",".join(anchor_store.values())
+    return json.dumps(anchor_store)
 
 
 @app.get("/api/clearanchors")
