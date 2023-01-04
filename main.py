@@ -13,11 +13,11 @@ async def root():
 
 
 @app.post("/api/anchors/key")
-async def save_anchor(anchorKey: Any, location: Any):
+async def save_anchor(anchorKey: Any, location: Any, gpsErrorRadius: Any):
     global index, anchor_store
     index = index + 1
     print(f'Saving anchor at index: {index} = {anchorKey}')
-    anchor_store[index] = (anchorKey, location)
+    anchor_store[index] = (anchorKey, location, gpsErrorRadius)
     return index
 
 
