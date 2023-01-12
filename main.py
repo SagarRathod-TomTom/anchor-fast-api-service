@@ -38,6 +38,12 @@ async def get_anchor_with_anchor_id(anchor_number: int):
 @app.get("/api/allanchors")
 async def get_all_anchors():
     global anchor_store
+    return ",".join([value[0] for value in anchor_store.values()])
+
+
+@app.get("/api/alldata")
+async def get_all_data():
+    global anchor_store
     print('Anchor Store:', anchor_store)
     return json.dumps(anchor_store)
 
